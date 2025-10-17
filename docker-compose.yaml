@@ -1,0 +1,23 @@
+services:
+  pgserver:
+    image: postgres:18-alpine
+    container_name: pgserver
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - pgserver-data:/var/lib/postgresql
+  pgadmin:
+    image: dpage/pgadmin4:9
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@test.de
+      PGADMIN_DEFAULT_PASSWORD: secret
+    ports:
+      - "9080:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+volumes:
+  pgserver-data: {}
+  pgadmin-data: {}
